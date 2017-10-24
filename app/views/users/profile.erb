@@ -1,0 +1,14 @@
+<center><h1>Hello, <%= @user.username.capitalize%> !!!</h1>
+ <br>
+<img src="https://mythailandtours.com/wp-content/uploads/2016/06/James-Bond-Island-tour.jpg" style="width:650px;height:400px;">
+<ul>
+<% @user.gear.each_with_index do |g| %>
+<li><%= g.name %></li>
+<% end %>
+</ul>
+<br>
+<p>Do you have more gear to<a href="/gear/new"> ADD?</a>
+<br>
+<p>Would you like to <a href="/gear/:id/edit">EDIT YOUR LIST?</a></p>
+<br>
+<p>Or would you like to <a href="/logout">LOGOUT?</a></p>

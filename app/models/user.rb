@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :gear
+  has_many :gears
   has_secure_password
 
   def slug

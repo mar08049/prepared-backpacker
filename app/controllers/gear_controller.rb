@@ -4,7 +4,6 @@ class GearController < ApplicationController
     if logged_in? && current_user
       @user = current_user
       session[:user_id] = @user.id
-      @gear_list = Gear.all
       erb :'/gear/home'
     else
       redirect '/'
@@ -26,7 +25,6 @@ class GearController < ApplicationController
     @user = current_user
     if logged_in? && !params[:name].empty?
     @gear = Gear.create(name: params[:name])
-    @user.gear_list << @gear
     redirect '/gear'
     else
       redirect '/gear/new'

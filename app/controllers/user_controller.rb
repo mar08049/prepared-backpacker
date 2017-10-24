@@ -44,7 +44,7 @@ class UserController < ApplicationController
     @user = User.find_by_slug(params[:slug])
     @user = current_user
     if current_user
-       erb :'/users/show'
+       erb :'/users/profile'
      else
        redirect '/gear'
      end

@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024154912) do
+ActiveRecord::Schema.define(version: 20171024173513) do
 
-  create_table "gear", force: :cascade do |t|
+  create_table "gears", force: :cascade do |t|
     t.integer "user_id"
     t.string  "name"
   end
