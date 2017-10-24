@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class GearController < ApplicationController
 
   get '/gear' do
     if logged_in? && current_user
