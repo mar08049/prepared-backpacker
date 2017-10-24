@@ -1,3 +1,5 @@
+require 'pry'
+
 class GearController < ApplicationController
 
   get '/gear' do
@@ -10,7 +12,7 @@ class GearController < ApplicationController
     end
   end
 
-  get '/candies/new' do
+  get '/gear/new' do
     @gear = Gear.find_by(id: params[:id])
     if logged_in? && current_user
       @gear = current_user
@@ -46,7 +48,6 @@ class GearController < ApplicationController
       @gear = Gear.find_by(id: params[:id])
       erb :'gear/edit'
     else
-      flash[:notice] = "You're not logged in"
       redirect '/'
     end
   end

@@ -1,3 +1,5 @@
+require 'pry'
+
 class UserController < ApplicationController
 
   get '/signup' do
