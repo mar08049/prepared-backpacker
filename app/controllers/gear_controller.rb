@@ -6,7 +6,8 @@ class GearController < ApplicationController
     if logged_in? && current_user
       @user = current_user
       session[:user_id] = @user.id
-      erb :'/gear/home'
+      @gears = Gear.all
+      erb :'/gear/index'
     else
       redirect '/'
     end
@@ -15,7 +16,7 @@ class GearController < ApplicationController
   get '/gear/new' do
     @gear = Gear.find_by(id: params[:id])
     if logged_in? && current_user
-      @gear = current_user
+      @user = current_user
       session[:user_id] = @user.id
       erb :'/gear/new'
     else
@@ -25,6 +26,7 @@ class GearController < ApplicationController
 
   post '/gear' do
     @user = current_user
+    binding.pry
     if logged_in? && !params[:name].empty?
     @gear = Gear.create(name: params[:name])
     redirect '/gear'
@@ -37,6 +39,7 @@ class GearController < ApplicationController
     if logged_in?
       @user = current_user
       @gear = Gear.find_by(id: params[:id])
+      @user.gear << @gear
       erb :'gear/show'
     else
       redirect '/'

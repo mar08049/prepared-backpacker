@@ -1,0 +1,12 @@
+<h1>Welcome, <%= @user.username.capitalize %></h1>
+  <br>
+  <h3>Gear:</h3>
+  <ul>
+  <% @user.gear.each_with_index do |item| %>
+  <li><%= item.name %></li>
+  <% end %>
+  </ul>
+  <br>
+  <br>
+  Go back to your <a href="/travelers/show" value="submit">Profile Page</a><br>
+  <a href="/logout" value="submit">Logout</a>
