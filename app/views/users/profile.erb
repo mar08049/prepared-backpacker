@@ -2,13 +2,17 @@
  <br>
 <img src="https://mythailandtours.com/wp-content/uploads/2016/06/James-Bond-Island-tour.jpg" style="width:650px;height:400px;">
 <ul>
-<% @user.gears.each_with_index do |g| %>
-<li><%= g.name %></li>
+<% @user.gears.each do |g| %>
+<li>-<%= g.name.capitalize %>-</li>
 <% end %>
 </ul>
+<br>
 <br>
 <p>Do you have more gear to<a href="/gear/new"> ADD?</a>
 <br>
 <p>Would you like to <a href="/gear/:id/edit">EDIT YOUR LIST?</a></p>
+<h3>Need Ideas? Checkout these backpacking lists by destination!</h3>
 <br>
-<p>Or would you like to <a href="/logout">LOGOUT?</a></p>
+<h2><a href="https://thesavvybackpacker.com/backpacking-europe-packing-list/">Europe</a></h2><h2><a href="https://www.bemytravelmuse.com/packing-for-southeast-asia/">Asia</a></h2><h2>North America</h2><h2>South America</h2><h2>Africa</h2>
+<br>
+<p> <a href="/logout">LOGOUT?</a></p>
