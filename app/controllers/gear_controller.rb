@@ -40,6 +40,7 @@ class GearController < ApplicationController
       @user = current_user
       @gear = Gear.find_by(id: params[:id])
       @user.gears << @gear
+
       erb :'gear/show'
     else
       redirect '/'
@@ -47,12 +48,8 @@ class GearController < ApplicationController
   end
 
   get '/gear/:id/edit' do
-    if logged_in?
-      @gear = Gear.find_by(id: params[:id])
+    @gear = Gear.find_by(id: params[:id])
       erb :'gear/edit'
-    else
-      redirect '/'
-    end
   end
 
   patch '/gear/:id' do
@@ -66,15 +63,14 @@ class GearController < ApplicationController
     end
   end
 
-  delete '/candies/:id/edit' do
+  delete '/gear/:id/delete' do
     @gear = Gear.find_by(id: params[:id])
     @user = current_user
-    if logged_in?
+    if logged_in? && @gear.user == current_user
       @gear.delete
       redirect '/gear'
     else
       redirect "/gear/#{@gear.id}"
     end
   end
-
 end

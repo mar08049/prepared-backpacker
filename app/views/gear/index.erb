@@ -2,8 +2,8 @@
   <br>
   <h3>Gear:</h3>
   <ul>
-  <% @user.gears.each_with_index do |item| %>
-  <li><%= item.name %></li>
+  <% @user.gears.each do |item| %>
+  <li><%= item.name.capitalize %></li>
   <% end %>
   </ul>
   <br>
