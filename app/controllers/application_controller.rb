@@ -20,12 +20,12 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
-    def current_user
+    def current_user #=> returns User instance || nil
        User.find_by_id(session[:user_id])
     end
 
     def logged_in?
-      !!session[:user_id]
+      !!current_user
     end
   end
 

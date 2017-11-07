@@ -1,0 +1,15 @@
+<center><h1><%= @gear.name %></h1></font>
+  <br>
+  <br>
+<form action="/gear/<%= @gear.id %>/edit">
+      <input type="submit" value="edit" />
+  </form>
+<br>
+<br>
+  <form action="" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="delete" id="Delete">
+  </form>
+  <br>
+  <br>
+  <a href="/users/:id">Homepage</a>

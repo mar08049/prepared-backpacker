@@ -1,0 +1,21 @@
+<center><h1>Edit your list!</h1></font>
+<center><h2>Gear:</font> <%= @user.gears %></h1>
+
+<form action="/gear/<%= @gear.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  Name: <input type="text" name="name"><br>
+  <br>
+  <input type="submit" value="Change">
+</form>
+
+<form action="" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="delete" id="Delete">
+</form>
+<br>
+<br>
+<br>
+<a href="/users/:id">Back to Homepage</a>
+<br>
+<br>
+<a href="/logout">Logout</a>

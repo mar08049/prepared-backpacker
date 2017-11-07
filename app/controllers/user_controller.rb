@@ -4,7 +4,7 @@ class UserController < ApplicationController
 
   get '/signup' do
     if !logged_in?
-    erb :'/users/signup'
+      erb :'/users/signup'
     else
       @user = current_user
       session[:user_id] = @user.id
@@ -56,5 +56,4 @@ class UserController < ApplicationController
     session.clear
     redirect '/'
   end
-
 end
