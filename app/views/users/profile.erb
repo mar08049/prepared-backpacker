@@ -2,16 +2,20 @@
  <br>
 <img src="https://mythailandtours.com/wp-content/uploads/2016/06/James-Bond-Island-tour.jpg" style="width:650px;height:400px;">
 <ul>
-<% @user.gears.each do |g| %>
-<li>-<%= g.name.capitalize %>-</li>
-<% end %>
-</ul>
+<% @user.gears.each do |item| %>
+  <li>
+    -<%= item.name.capitalize %>  <a href="/gear/<%= item.id%>">Modify</a>
+  </li>
+    <% end %>
+  </ul>
+
+
 <br>
 <br>
-<p>Do you have more gear to<a href="/gear/new"> ADD?</a>
+<p>Do you have more gear to<a href="/gear/new"> ADD?</a> Click on the ADD link or edit your list by using the above links.<p>
 <br>
 <br>
-<a href="/gear/edit">Edit Gear?</a>
+
 <br>
 <h3>Need Ideas? Checkout these backpacking lists by destination!</h3>
 <br>

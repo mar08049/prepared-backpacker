@@ -1,15 +1,29 @@
-<center><h1><%= @gear.name %></h1></font>
-  <br>
-  <br>
-<form action="/gear/<%= @gear.id %>/edit">
-      <input type="submit" value="edit" />
+<center><h1>Modify <%= @gear.name.capitalize %></h1>
+<br>
+<br>
+<img src="https://images.studentuniverse.com/new/suwebui/photos/marketing/naturebackpacking.jpg" style="width:650px;height:400px;">
+<ul>
+  <li>
+    -<%= @gear.name.capitalize %>
+  </li>
+  </ul>
+
+  <form action="/gear/<%= @gear.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    Name: <input type="text" name="name"><br>
+    <br>
+    <input type="submit" value="Change">
   </form>
-<br>
-<br>
+
+  or
+
   <form action="" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
     <input type="submit" value="delete" id="Delete">
   </form>
+
+  <br>
+  <a href="/users/:id">Back to Homepage</a>
   <br>
   <br>
-  <a href="/users/:id">Homepage</a>
+  <a href="/logout">Logout</a>
