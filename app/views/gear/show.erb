@@ -2,15 +2,11 @@
 <br>
 <br>
 <img src="https://images.studentuniverse.com/new/suwebui/photos/marketing/naturebackpacking.jpg" style="width:650px;height:400px;">
-<ul>
-  <li>
-    -<%= @gear.name.capitalize %>
-  </li>
-  </ul>
+
 
   <form action="/gear/<%= @gear.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
-    Name: <input type="text" name="name"><br>
+    Change <%=@gear.name.capitalize%> to: <input type="text" name="name"><br>
     <br>
     <input type="submit" value="Change">
   </form>
@@ -23,7 +19,7 @@
   </form>
 
   <br>
-  <a href="/users/:id">Back to Homepage</a>
+  <a href="/users/:id">Back to Profile Page</a>
   <br>
   <br>
   <a href="/logout">Logout</a>
