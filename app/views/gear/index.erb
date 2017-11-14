@@ -1,8 +1,8 @@
-<h1> <%= @user.username.capitalize %>'s List</h1>
+<h1> <%= current_user.username.capitalize %>'s List</h1>
   <br>
   <h3>Gear:</h3>
   <ul>
-  <% @user.gears.each do |item| %>
+  <% @gears.each do |item| %>
   <li><%= item.name.capitalize %></li>
   <% end %>
   </ul>

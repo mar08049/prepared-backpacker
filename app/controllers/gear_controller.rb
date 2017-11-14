@@ -3,10 +3,8 @@ require 'pry'
 class GearController < ApplicationController
 
   get '/gear' do
-    if logged_in? && current_user
-      @user = current_user
-      session[:user_id] = @user.id
-      @gears = []
+    if logged_in?
+      @gears = current_user.gears
       erb :'/gear/index'
     else
       redirect '/'
@@ -14,63 +12,74 @@ class GearController < ApplicationController
   end
 
   get '/gear/new' do
-    @gear = Gear.find_by(id: params[:id])
-    if logged_in? && current_user
-      @user = current_user
-      session[:user_id] = @user.id
-      erb :'/gear/new'
-    else
-      redirect '/'
-    end
-  end
-
-  post '/gear' do
-    @user = current_user
-    if logged_in? && !params[:name].empty?
-      @user.gears.create(name: params[:name])
-      redirect "/users/#{@user.slug}"
-    else
-      redirect '/gear/new'
-    end
-  end
-
-  get '/gear/:id' do
-    @gear = Gear.find_by(id: params[:id])
     if logged_in?
-      @user = current_user
-      erb :'/gear/show'
+      erb :'/gear/new'
     else
       redirect '/login'
     end
   end
 
+  post '/gear' do
+    if logged_in?
+      if !params[:name].empty?
+        @gear = current_user.gears.build(name: params[:name])
+        if @gear.save
+          redirect "/users/#{current_user.slug}"
+        end
+      end
+      redirect '/gear/new'
+    else
+      redirect to '/login'
+    end
+  end
+
+  get '/gear/:id' do
+    if logged_in?
+      @gear = Gear.find_by(id: params[:id])
+      if @gear && @gear.user == current_user
+        erb :'/gear/show'
+      else
+        redirect "/users/#{current_user.slug}"
+      end
+    else
+      redirect '/'
+    end
+  end
+
   get '/gear/:id/edit' do
-    if logged_in? && @gear.user == current_user
-      erb :'/gear/edit'
+    if logged_in?
+      if @gear.user == current_user
+      erb :'/gear/show'
+      end
     else
       redirect '/login'
     end
   end
 
   patch '/gear/:id' do
-    @gear = Gear.find_by_id(params[:id])
-    if logged_in? && @gear.user == current_user && !params[:name].empty?
-      @user = current_user
+    if logged_in?
+      @gear = Gear.find_by_id(params[:id])
+      if @gear.user == current_user && !params[:name].empty?
       @gear.update(name: params[:name])
       @gear.save
       redirect "/gear/#{@gear.id}"
+      end
     else
-      redirect "/gear/#{@gear.id}/edit"
+      redirect '/login'
     end
   end
+
   delete '/gear/:id' do
     @gear = Gear.find_by(id: params[:id])
-    @user = current_user
     if logged_in?
-      @gear.delete
-      redirect '/users/profile'
+      if @gear && @gear.user == current_user
+        @gear.delete
+        redirect "/users/#{current_user.slug}"
+      else
+        redirect '/gear/#{@gear.id}'
+      end
     else
-      redirect "/gear/#{@gear.id}"
+      redirect '/login'
     end
   end
 end
