@@ -48,7 +48,8 @@ class GearController < ApplicationController
 
   get '/gear/:id/edit' do
     if logged_in?
-      if @gear.user == current_user
+      @gear = Gear.find_by_id(params[:id])
+      if @gear && @gear.user == current_user
       erb :'/gear/show'
       end
     else
@@ -60,9 +61,10 @@ class GearController < ApplicationController
     if logged_in?
       @gear = Gear.find_by_id(params[:id])
       if @gear.user == current_user && !params[:name].empty?
-      @gear.update(name: params[:name])
-      @gear.save
-      redirect "/gear/#{@gear.id}"
+        @gear.update(name: params[:name])
+        redirect "/gear/#{@gear.id}"
+      else
+        redirect "/users/#{current_user.slug}"
       end
     else
       redirect '/login'
@@ -73,7 +75,7 @@ class GearController < ApplicationController
     @gear = Gear.find_by(id: params[:id])
     if logged_in?
       if @gear && @gear.user == current_user
-        @gear.delete
+        @gear.destroy
         redirect "/users/#{current_user.slug}"
       else
         redirect '/gear/#{@gear.id}'
