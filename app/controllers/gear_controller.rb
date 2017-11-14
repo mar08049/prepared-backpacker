@@ -50,7 +50,9 @@ class GearController < ApplicationController
     if logged_in?
       @gear = Gear.find_by_id(params[:id])
       if @gear && @gear.user == current_user
-      erb :'/gear/show'
+        erb :'/gear/show'
+      else
+        redirect "/users/#{current_user.slug}"
       end
     else
       redirect '/login'
