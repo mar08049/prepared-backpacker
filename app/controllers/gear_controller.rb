@@ -74,8 +74,8 @@ class GearController < ApplicationController
   end
 
   delete '/gear/:id' do
-    @gear = Gear.find_by(id: params[:id])
     if logged_in?
+      @gear = Gear.find_by(id: params[:id])
       if @gear && @gear.user == current_user
         @gear.destroy
         redirect "/users/#{current_user.slug}"
